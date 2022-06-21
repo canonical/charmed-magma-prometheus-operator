@@ -44,7 +44,8 @@ class TestActiveStatus(unittest.TestCase):
 
     @patch_network_get()
     @patch("charm.KubernetesServicePatch", lambda x, y: None)
-    def test_unit_is_active_if_deployed_without_relations_or_config(self):
+    @patch("charm.KubernetesComputeResourcesPatch")
+    def test_unit_is_active_if_deployed_without_relations_or_config(self, *unused):
         """Scenario: Unit is deployed without any user-provided config or regular relations."""
         # GIVEN reload configuration succeeds
         with patch("prometheus_server.Prometheus.reload_configuration", lambda *a, **kw: True):
@@ -61,7 +62,8 @@ class TestActiveStatus(unittest.TestCase):
 
     @patch_network_get()
     @patch("charm.KubernetesServicePatch", lambda x, y: None)
-    def test_unit_is_blocked_if_reload_configuration_fails(self):
+    @patch("charm.KubernetesComputeResourcesPatch")
+    def test_unit_is_blocked_if_reload_configuration_fails(self, *unused):
         """Scenario: Unit is deployed but reload configuration fails."""
         # GIVEN reload configuration fails
         # Construct mock objects
