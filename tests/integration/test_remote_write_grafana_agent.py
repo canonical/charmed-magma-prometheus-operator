@@ -151,11 +151,15 @@ async def test_check_data_not_persist_on_scale_0(ops_test, prometheus_charm):
     await ops_test.model.applications[prometheus_app_name].scale(scale=0)
 
     logger.info("Blocking until scaled down...")
-    await ops_test.model.wait_for_idle(apps=[prometheus_app_name], wait_for_exact_units=0, timeout=120)
+    await ops_test.model.wait_for_idle(
+        apps=[prometheus_app_name], wait_for_exact_units=0, timeout=120
+    )
 
     await ops_test.model.block_until(
         lambda: len(ops_test.model.applications[prometheus_app_name].units) == 0
     )
+
+    logger.info("Scaling up...")
     await ops_test.model.applications[prometheus_app_name].scale(scale_change=1)
     await ops_test.model.wait_for_idle(apps=[prometheus_app_name], status="active", timeout=120)
     assert await check_prometheus_is_ready(ops_test, prometheus_app_name, 0)
