@@ -8,7 +8,11 @@ toolkit.
 
 This repository is a fork of the
 [prometheus-k8s-operator](https://github.com/canonical/prometheus-k8s-operator).
+<<<<<<< HEAD
 It contains a [Juju](https://juju.is/) charm for deploying the monitoring component 
+=======
+It contains a [Juju](https://juju.is/) Charm for deploying the monitoring component 
+>>>>>>> f0c81e7 (Adding prometheus-configurer container)
 of Prometheus in a Kubernetes cluster along with an additional 
 [prometheus-configurer](https://github.com/facebookarchive/prometheus-configmanager) container, 
 providing an HTTP API for managing Prometheus's alerting rules.<br>

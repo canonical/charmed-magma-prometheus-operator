@@ -29,12 +29,17 @@ from charms.prometheus_k8s.v0.prometheus_scrape import (
     MetricsEndpointProvider,
 )
 from charms.traefik_k8s.v0.ingress_per_unit import IngressPerUnitRequirer
-from lightkube import Client
-from lightkube.core.exceptions import ApiError as LightkubeApiError
-from lightkube.resources.core_v1 import PersistentVolumeClaim, Pod
+from lightkube import Client  # type: ignore[import]
+from lightkube.core.exceptions import (
+    ApiError as LightkubeApiError,  # type: ignore[import]
+)
+from lightkube.resources.core_v1 import (  # type: ignore[import]
+    PersistentVolumeClaim,
+    Pod,
+)
 from ops.charm import ActionEvent, CharmBase
 from ops.main import main
-from ops.model import ActiveStatus, BlockedStatus, MaintenanceStatus
+from ops.model import ActiveStatus, BlockedStatus, MaintenanceStatus, WaitingStatus
 from ops.pebble import ChangeError, ExecError, Layer
 
 from prometheus_server import Prometheus

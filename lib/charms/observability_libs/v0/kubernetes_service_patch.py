@@ -85,11 +85,11 @@ import logging
 from types import MethodType
 from typing import Literal, Sequence, Tuple, Union
 
-from lightkube import ApiError, Client
-from lightkube.models.core_v1 import ServicePort, ServiceSpec
-from lightkube.models.meta_v1 import ObjectMeta
-from lightkube.resources.core_v1 import Service
-from lightkube.types import PatchType
+from lightkube import ApiError, Client  # type: ignore[import]
+from lightkube.models.core_v1 import ServicePort, ServiceSpec  # type: ignore[import]
+from lightkube.models.meta_v1 import ObjectMeta  # type: ignore[import]
+from lightkube.resources.core_v1 import Service  # type: ignore[import]
+from lightkube.types import PatchType  # type: ignore[import]
 from ops.charm import CharmBase
 from ops.framework import Object
 
