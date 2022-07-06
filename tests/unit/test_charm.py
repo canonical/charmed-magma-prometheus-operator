@@ -218,7 +218,7 @@ class TestCharm(unittest.TestCase):
                     "command": "prometheus_configurer "
                     "-port=9100 "
                     "-rules-dir=/etc/prometheus/rules/ "
-                    "-prometheusURL=magma-orc8r-prometheus:9090 "
+                    "-prometheusURL=prometheus-with-configurer:9090 "
                     "-multitenant-label=networkID "
                     "-restrict-queries",
                 }

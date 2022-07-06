@@ -30,8 +30,8 @@ from charms.prometheus_k8s.v0.prometheus_scrape import (
 )
 from charms.traefik_k8s.v0.ingress_per_unit import IngressPerUnitRequirer
 from lightkube import Client  # type: ignore[import]
-from lightkube.core.exceptions import (
-    ApiError as LightkubeApiError,  # type: ignore[import]
+from lightkube.core.exceptions import (  # type: ignore[import]
+    ApiError as LightkubeApiError,
 )
 from lightkube.resources.core_v1 import (  # type: ignore[import]
     PersistentVolumeClaim,
@@ -71,7 +71,7 @@ class PrometheusCharm(CharmBase):
                     self._prometheus_configurer_port,
                     self._prometheus_configurer_port,
                 ),
-            ]
+            ],
         )
         self._topology = JujuTopology.from_charm(self)
 
