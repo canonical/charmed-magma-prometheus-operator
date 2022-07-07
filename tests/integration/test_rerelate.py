@@ -77,9 +77,12 @@ async def test_build_and_deploy(ops_test: OpsTest, prometheus_charm, prometheus_
 
     await asyncio.gather(
         ops_test.model.add_relation(app_name, tester_app_name),
-        ops_test.model.add_relation(app_name, "alertmanager:alertmanager"),
-        ops_test.model.add_relation(app_name, "grafana:grafana-source"),
-        ops_test.model.add_relation(app_name, "grafana-agent:send-remote-write"),
+        ops_test.model.add_relation(f"{app_name}:alertmanager", "alertmanager:alerting"),
+        ops_test.model.add_relation(f"{app_name}:grafana-source", "grafana:grafana-source"),
+        ops_test.model.add_relation(
+            f"{app_name}:receive-remote-write",
+            "grafana-agent:send-remote-write",
+        ),
     )
     await ops_test.model.wait_for_idle(status="active", timeout=600)
 
