@@ -24,7 +24,10 @@ logger = logging.getLogger(__name__)
 
 METADATA = yaml.safe_load(Path("./metadata.yaml").read_text())
 app_name = METADATA["name"]
-resources = {"prometheus-image": oci_image("./metadata.yaml", "prometheus-image")}
+resources = {
+    "prometheus-image": oci_image("./metadata.yaml", "prometheus-image"),
+    "prometheus-configurer-image": oci_image("./metadata.yaml", "prometheus-configurer-image"),
+}
 tester_app_name = "prometheus-tester"
 tester_resources = {
     "prometheus-tester-image": oci_image(
@@ -74,7 +77,7 @@ async def test_build_and_deploy(ops_test: OpsTest, prometheus_charm, prometheus_
 
     await asyncio.gather(
         ops_test.model.add_relation(app_name, tester_app_name),
-        ops_test.model.add_relation(app_name, "alertmanager"),
+        ops_test.model.add_relation(app_name, "alertmanager:alertmanager"),
         ops_test.model.add_relation(app_name, "grafana:grafana-source"),
         ops_test.model.add_relation(app_name, "grafana-agent:send-remote-write"),
     )

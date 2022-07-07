@@ -20,7 +20,12 @@ METADATA = yaml.safe_load(Path("./metadata.yaml").read_text())
 async def test_charm_successfully_relates_to_avalanche(ops_test: OpsTest, prometheus_charm):
     """Deploy the charm-under-test together with related charms."""
     await ops_test.model.set_config({"logging-config": "<root>=WARNING; unit=DEBUG"})
-    resources = {"prometheus-image": METADATA["resources"]["prometheus-image"]["upstream-source"]}
+    resources = {
+        "prometheus-image": METADATA["resources"]["prometheus-image"]["upstream-source"],
+        "prometheus-configurer-image": METADATA["resources"]["prometheus-configurer-image"][
+            "upstream-source"
+        ],
+    }
 
     # deploy prometheus
     await ops_test.model.deploy(

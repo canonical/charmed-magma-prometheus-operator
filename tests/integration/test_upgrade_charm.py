@@ -16,7 +16,10 @@ from helpers import (
 
 logger = logging.getLogger(__name__)
 
-prometheus_resources = {"prometheus-image": oci_image("./metadata.yaml", "prometheus-image")}
+prometheus_resources = {
+    "prometheus-image": oci_image("./metadata.yaml", "prometheus-image"),
+    "prometheus-configurer-image": oci_image("./metadata.yaml", "prometheus-configurer-image"),
+}
 tester_resources = {
     "prometheus-tester-image": oci_image(
         "./tests/integration/prometheus-tester/metadata.yaml", "prometheus-tester-image"

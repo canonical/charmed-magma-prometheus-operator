@@ -32,7 +32,10 @@ from pytest_operator.plugin import OpsTest
 logger = logging.getLogger(__name__)
 
 prometheus_app_name = "prometheus"
-prometheus_resources = {"prometheus-image": oci_image("./metadata.yaml", "prometheus-image")}
+prometheus_resources = {
+    "prometheus-image": oci_image("./metadata.yaml", "prometheus-image"),
+    "prometheus-configurer-image": oci_image("./metadata.yaml", "prometheus-configurer-image"),
+}
 scrape_tester = "tester"
 scrape_tester_resources = {
     "prometheus-tester-image": oci_image(

@@ -26,7 +26,12 @@ async def test_ingress_traefik_k8s(ops_test, prometheus_charm):
     await asyncio.gather(
         ops_test.model.deploy(
             prometheus_charm,
-            resources={"prometheus-image": oci_image("./metadata.yaml", "prometheus-image")},
+            resources={
+                "prometheus-image": oci_image("./metadata.yaml", "prometheus-image"),
+                "prometheus-configurer-image": oci_image(
+                    "./metadata.yaml", "prometheus-configurer-image"
+                ),
+            },
             application_name=prometheus_name,
             trust=True,  # otherwise errors on ghwf (persistentvolumeclaims ... is forbidden)
         ),

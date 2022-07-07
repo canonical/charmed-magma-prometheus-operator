@@ -15,7 +15,10 @@ from helpers import (
 )
 
 logger = logging.getLogger(__name__)
-prometheus_resources = {"prometheus-image": oci_image("./metadata.yaml", "prometheus-image")}
+prometheus_resources = {
+    "prometheus-image": oci_image("./metadata.yaml", "prometheus-image"),
+    "prometheus-configurer-image": oci_image("./metadata.yaml", "prometheus-configurer-image"),
+}
 
 
 @pytest.mark.abort_on_fail
