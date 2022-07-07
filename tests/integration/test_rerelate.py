@@ -24,7 +24,10 @@ logger = logging.getLogger(__name__)
 
 METADATA = yaml.safe_load(Path("./metadata.yaml").read_text())
 app_name = METADATA["name"]
-resources = {"prometheus-image": oci_image("./metadata.yaml", "prometheus-image")}
+resources = {
+    "prometheus-image": oci_image("./metadata.yaml", "prometheus-image"),
+    "prometheus-configurer-image": oci_image("./metadata.yaml", "prometheus-configurer-image"),
+}
 tester_app_name = "prometheus-tester"
 tester_resources = {
     "prometheus-tester-image": oci_image(
