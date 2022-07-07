@@ -250,7 +250,7 @@ async def test_rescale_prometheus(ops_test: OpsTest):
 
     # THEN nothing breaks
     await ops_test.model.wait_for_idle(
-        apps=[prometheus_app_name], status="active", timeout=120, wait_for_exact_units=num_units
+        apps=[prometheus_app_name], status="active", timeout=240, wait_for_exact_units=num_units
     )
     await ops_test.model.wait_for_idle(status="active")
     await asyncio.gather(
