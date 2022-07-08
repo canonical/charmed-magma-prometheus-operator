@@ -8,7 +8,7 @@ toolkit.
 
 This repository is a fork of the
 [prometheus-k8s-operator](https://github.com/canonical/prometheus-k8s-operator).
-It contains a [Juju](https://juju.is/) Charm for deploying the monitoring component 
+It contains a [Juju](https://juju.is/) charm for deploying the monitoring component 
 of Prometheus in a Kubernetes cluster along with an additional 
 [prometheus-configurer](https://github.com/facebookarchive/prometheus-configmanager) container, 
 providing an HTTP API for managing Prometheus's alerting rules.<br>
@@ -44,11 +44,6 @@ $ juju relate kube-state-metrics prometheus-with-configurer
 ```
 
 In a similar manner any charm that exposes a scrape target may be related to the Prometheus charm.
-
-At present it is expected that all relations the Prometheus Operator partakes in are within the 
-same Juju model.
-[Further development](https://github.com/canonical/prometheus-operator/issues/58) may extend this 
-to allow cross model scrape targets.
 
 ### Configuring alert rules via prometheus-configurer
 

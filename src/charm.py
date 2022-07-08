@@ -61,11 +61,7 @@ class PrometheusCharm(CharmBase):
             self,
             [
                 (f"{self.app.name}", self._prometheus_port),
-                (
-                    "prom-configmanager",
-                    self._prometheus_configurer_port,
-                    self._prometheus_configurer_port,
-                ),
+                ("prom-configmanager", self._prometheus_configurer_port),
             ],
         )
         self._topology = JujuTopology.from_charm(self)
