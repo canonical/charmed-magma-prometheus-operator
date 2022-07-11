@@ -26,7 +26,7 @@ tester_resources = {
     )
 }
 
-prometheus_app_name = "prometheus-k8s"
+prometheus_app_name = "prometheus-with-configurer"
 tester_app_name = "prometheus-tester"
 app_names = [prometheus_app_name, tester_app_name]
 
