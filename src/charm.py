@@ -12,6 +12,7 @@ from typing import Dict, cast
 from urllib.parse import urlparse
 
 import bitmath
+import ops.pebble
 import yaml
 from charms.alertmanager_k8s.v0.alertmanager_dispatch import AlertmanagerConsumer
 from charms.grafana_k8s.v0.grafana_dashboard import GrafanaDashboardProvider
@@ -226,9 +227,12 @@ class PrometheusCharm(CharmBase):
         """
         # Remove only rules files created by the metrics_consumer and remote_write_provider
         # Leave rules files created by the prometheus-configurer
-        for file in container.list_files(RULES_DIR):
-            if "juju_" in file.path:
-                container.remove_path(file.path)
+        try:
+            for file in container.list_files(RULES_DIR):
+                if "juju_" in file.path:
+                    container.remove_path(file.path)
+        except ops.pebble.APIError:
+            logger.debug("No rules files found!")
 
         self._push_alert_rules(container, self.metrics_consumer.alerts())
         self._push_alert_rules(container, self.remote_write_provider.alerts())
