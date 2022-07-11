@@ -224,6 +224,12 @@ class PrometheusCharm(CharmBase):
                 alert rule files need to be created. This container
                 must be in a pebble ready state.
         """
+        # Remove only rules files created by the metrics_consumer and remote_write_provider
+        # Leave rules files created by the prometheus-configurer
+        for file in container.list_files(RULES_DIR):
+            if "juju_" in file.path:
+                container.remove_path(file.path)
+
         self._push_alert_rules(container, self.metrics_consumer.alerts())
         self._push_alert_rules(container, self.remote_write_provider.alerts())
 
